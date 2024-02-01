@@ -303,46 +303,45 @@ app.post('/reset-feedbacks', (req, res) => {
 
 
 
-function runOCRScript() {
-  const pythonScriptPath = path.join(__dirname, 'main.py');
-  const inputImagePath = path.join(__dirname, 'input/image.jpg');
-  const outputTextPath = path.join(__dirname, 'output/ocr_text.txt');
 
-  // Check if input and output directories exist, create them if not
-  if (!fs.existsSync(path.dirname(inputImagePath))) {
-      fs.mkdirSync(path.dirname(inputImagePath), { recursive: true });
-  }
-  if (!fs.existsSync(path.dirname(outputTextPath))) {
-      fs.mkdirSync(path.dirname(outputTextPath), { recursive: true });
-  }
+process.chdir(__dirname);
 
-  const installProcess = exec('pip install -r requirements.txt', (error, stdout, stderr) => {
+function runPythonScript() {
+  const pythonInterpreter = 'C:\\Users\\nilup\\anaconda3\\python.exe';
+  const pythonScript = 'main.py';
+
+  // Ensure input and output directories exist
+  const inputDir = path.join(__dirname, 'input');
+  const outputDir = path.join(__dirname, 'output');
+  fs.mkdirSync(inputDir, { recursive: true });
+  fs.mkdirSync(outputDir, { recursive: true });
+
+  // Execute the Python script
+  const pythonProcess = exec(`${pythonInterpreter} ${pythonScript}`, { cwd: __dirname }, (error, stdout, stderr) => {
       if (error) {
-          console.error(`Error installing dependencies: ${error.message}`);
+          console.error(`Error running Python script: ${error.message}`);
           return;
       }
-      console.log(`Dependencies installed successfully.`);
 
-      const pythonProcess = exec(`python3 "${pythonScriptPath}"`, (error, stdout, stderr) => {
-        if (error) {
-              console.error(`Error running OCR script: ${error.message}`);
+      // Read and print the OCR result from the output file
+      const ocrTextPath = path.join(outputDir, 'ocr_text.txt');
+      fs.readFile(ocrTextPath, 'utf-8', (readError, data) => {
+          if (readError) {
+              console.error(`Error reading OCR result: ${readError.message}`);
               return;
           }
-          console.log(`OCR script executed successfully.`);
-
-          // Read the OCR result and print it to the console
-          const ocrResult = fs.readFileSync(outputTextPath, 'utf-8');
-          console.log(`OCR Result:\n${ocrResult}`);
+          console.log(`OCR Result:\n${data}`);
       });
-
-      pythonProcess.stdin.end();
   });
 
-  installProcess.stdin.end();
+  pythonProcess.stdin.end();
 }
 
-// Call the function to install dependencies and run the OCR script
-runOCRScript();
+// Call the function to run the Python script
+runPythonScript();
+
+
+
 
 
 
