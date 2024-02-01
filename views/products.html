@@ -1,0 +1,444 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js"></script>
+
+
+    <style>
+        .header {
+            background-color: #2b2a2a;
+            color: white;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        #scroll-menu {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        #scroll-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        #scroll-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .grid__item {
+            background-color: #fff;
+            border-radius: 0.4rem;
+            overflow: hidden;
+            box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .grid__item:hover {
+            transform: translateY(-0.5%);
+            box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
+        }
+
+
+        .property-card {
+            height: 20em;
+            width: 18em;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            position: relative;
+            -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            border-radius: 16px;
+            overflow: hidden;
+            -webkit-box-shadow: 15px 15px 27px white, -15px -15px 27px white;
+            box-shadow: 15px 15px 27px white, -15px -15px 27px white;
+        }
+
+
+        .property-image {
+            height: 14em;
+            width: 18em;
+            padding: 2em 2em;
+            position: Absolute;
+            top: 0px;
+            -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Bottom Card Section */
+
+        .property-description {
+            background-color: white;
+            height: 14em;
+            width: 18em;
+            position: absolute;
+            bottom: 0em;
+            -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 0.2em;
+            text-align: center;
+            margin-top: -0.3em;
+            /* Adjust this value as needed */
+            font-size: medium;
+        }
+
+
+        /* Social Icons */
+
+        .property-social-icons {
+            width: 1em;
+            height: 1em;
+            background-color: black;
+            position: absolute;
+            bottom: 1em;
+            left: 1em;
+            -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* Property Cards Hover States */
+
+        .property-card:hover .property-description {
+            height: 0em;
+            padding: 0px 0em;
+        }
+
+        .property-card:hover .property-image {
+            height: 14.3em;
+        }
+
+        .property-card:hover .property-social-icons {
+            background-color: white;
+        }
+
+        .property-card:hover .property-social-icons:hover {
+            background-color: blue;
+            cursor: pointer;
+        }
+
+        #filter-menu {
+            position: absolute;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        .error {
+      color: red;
+    }
+    .valid {
+      color: green;
+    }
+    .half-width-label {
+      width: 16.66%;
+    }
+    .half-width-input {
+      width: 33.33%;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/homepage">TradeLink</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/homepage">Home</a></li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                    <a class="dropdown-item" href="/products/items">Electric</a>
+                    <a class="dropdown-item" href="/products/items">Wooden</a>
+                    <a class="dropdown-item" href="/products/items">Fabric</a>
+                </div>  
+            </li> -->
+            <% if (isAdmin) { %>
+                <li class="nav-item"><a class="nav-link" href="/showFeedbacks">Show Feedbacks</a></li>
+            <% } %>
+            <li class="nav-item"><a class="nav-link" href="/products">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="/feedback">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-4">
+        <div id="filter-menu">
+
+
+            <h4>Filter Options</h4>
+            <label for="productType">Product Type:</label>
+            <select id="productType">
+                <option value="electric">Electric</option>
+                <option value="wooden">Wooden</option>
+                <option value="fabric">Fabric</option>
+            </select>
+            <label for="productName">Product Name:</label>
+            <input type="text" id="productName" placeholder="Enter product name">
+            <label for="manufacturedDate">Manufactured Date:</label>
+            <input type="date" id="manufacturedDate">
+            <div id="priceSlider"></div>
+            <div id="priceDisplay">
+                <span id="minPriceDisplay">$5</span> - <span id="maxPriceDisplay">$5000</span>
+            </div>
+            <label for="manufacturer">Manufacturer:</label>
+            <input type="text" id="manufacturer" placeholder="Enter manufacturer">
+            <label for="country">Country:</label>
+            <input type="text" id="country" placeholder="Enter country">
+            <button onclick="applyFilters()">Apply Filters</button>
+            <button onclick="resetFilters()">Reset Filters</button>
+
+
+        </div>
+        <br><br>
+        <h2 id="title_of_page" style="padding-left: 20%;">Products</h2><br><br>
+        <div class="row" style="padding-left: 20%;" id="productsContainer">
+
+        </div>
+    </div>
+
+
+
+    <br><br><br><br><br>
+    <div id="footer" class="footer">
+        <img src="public/images/Logo/Logo.png" alt="Company Logo" style="width: 50px; border-radius: 50%;">
+        <p id="currentYear">&copy; 2023 Company Name @ Org</p>
+    </div>
+
+
+
+    <script>
+        // Get the category parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get("category");
+
+        // Assign the category to the variable
+        const TypeOfTheProduct = category || "electric"; // Default to "electric" if no category parameter is provided
+
+
+        class Product {
+            constructor(name, imageUrl, description, productType, manufacturedDate, price, manufacturer, country) {
+                this.name = name;
+                this.imageUrl = imageUrl;
+                this.description = description;
+                this.productType = productType;
+                this.manufacturedDate = manufacturedDate;
+                this.price = price;
+                this.manufacturer = manufacturer;
+                this.country = country;
+            }
+        }
+
+        const allProducts = <%- JSON.stringify(products) %>;
+
+
+
+        // Function to generate product cards
+        function generateProductCard(product) {
+            return `
+                <div class="col-md-4 mb-4">
+                    <div class="property-card">
+                        <a href="#">
+                            <div class="property-image" style="background-image: url(${product.imageUrl});">
+                            </div>
+
+                        </a>
+                        <div class="property-description">
+                            <h5>${product.name}</h5>
+                            <p>${product.description}</p>
+                            <p>Product Type: ${product.productType}</p>
+                            <p>Manufactured Date: ${product.manufacturedDate}</p>
+                            <p>Price: $${product.price}</p>
+                            <p>Manufacturer: ${product.manufacturer}</p>
+                            <p>Country: ${product.country}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+
+        function toTitleCase(str) {
+            return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+
+        const titleCaseString = toTitleCase(TypeOfTheProduct) + " Products";
+
+
+        // Get the products container
+        const productsContainer = document.getElementById("productsContainer");
+        const title_of_page = document.getElementById("title_of_page");
+        title_of_page.innerHTML = titleCaseString;
+        
+        // Initialize the price range slider
+        const priceSlider = document.getElementById('priceSlider');
+        const minPriceDisplay = document.getElementById('minPriceDisplay');
+        const maxPriceDisplay = document.getElementById('maxPriceDisplay');
+        const priceRange = {
+            min: 5,
+            max: 5000,
+        };
+
+        noUiSlider.create(priceSlider, {
+            start: [priceRange.min, priceRange.max],
+            connect: true,
+            range: {
+                'min': priceRange.min,
+                'max': priceRange.max
+            },
+            step: 5, // Adjust this step value as needed
+            format: {
+                to: value => Math.round(value), // Round the displayed values
+                from: value => parseFloat(value)
+            }
+        });
+
+        // Update price display values when slider values change
+        priceSlider.noUiSlider.on('update', values => {
+            minPriceDisplay.textContent = values[0];
+            maxPriceDisplay.textContent = values[1];
+        });
+
+
+
+
+        // Function to apply filters including price range
+        function applyFilters() {
+            const productType = document.getElementById("productType").value;
+            const productName = document.getElementById("productName").value.toLowerCase();
+            const manufacturedDate = document.getElementById("manufacturedDate").value;
+            const minPrice = parseFloat(priceSlider.noUiSlider.get()[0]);
+            const maxPrice = parseFloat(priceSlider.noUiSlider.get()[1]);
+            const manufacturer = document.getElementById("manufacturer").value.toLowerCase();
+            const country = document.getElementById("country").value.toLowerCase();
+
+            const filteredProducts = allProducts.filter(product => {
+                // Filter by product type
+                if (productType !== "all" && product.productType.toLowerCase() !== productType) {
+                    return false;
+                }
+
+                // Filter by product name
+                if (productName && !product.name.toLowerCase().includes(productName)) {
+                    return false;
+                }
+
+                // Filter by manufactured date
+                if (manufacturedDate && product.manufacturedDate < manufacturedDate) {
+                    return false;
+                }
+
+                // Filter by price range
+                if (product.price < minPrice || product.price > maxPrice) {
+                    return false;
+                }
+
+                // Filter by manufacturer
+                if (manufacturer && !product.manufacturer.toLowerCase().includes(manufacturer)) {
+                    return false;
+                }
+
+                // Filter by country
+                if (country && !product.country.toLowerCase().includes(country)) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            // Clear the products container
+            const productsContainer = document.getElementById("productsContainer");
+            productsContainer.innerHTML = "";
+            const title_of_page = document.getElementById("title_of_page");
+            if (productType === "wooden") {
+                title_of_page.innerHTML = "Wooden Products";
+            } else if (productType === "fabric") {
+                title_of_page.innerHTML = "Fabric Products";
+            } else if (productType === "electric") {
+                title_of_page.innerHTML = "Electric Products";
+            }
+            // Generate and display filtered product cards
+            filteredProducts.forEach(product => {
+                const productCard = generateProductCard(product);
+                productsContainer.innerHTML += productCard;
+            });
+        }
+
+        function resetFilters() {
+            document.getElementById("productType").value = TypeOfTheProduct; // Reset product type dropdown to default "all"
+            document.getElementById("productName").value = "";
+            document.getElementById("manufacturedDate").value = "";
+            priceSlider.noUiSlider.reset(); // Reset the price range slider
+            document.getElementById("manufacturer").value = "";
+            document.getElementById("country").value = "";
+
+            applyFilters(); // Apply filters with reset values (show all products)
+        }
+
+        // Initial display of all products
+        resetFilters();
+
+
+
+  
+  function resetErrorMessages() {
+    document.getElementById("nameMsg").innerHTML = "";
+    document.getElementById("nameMsg").classList.remove("valid");
+  
+    document.getElementById("emailMsg").innerHTML = "";
+    document.getElementById("emailMsg").classList.remove("valid");
+  
+    document.getElementById("phoneMsg").innerHTML = "";
+    document.getElementById("phoneMsg").classList.remove("valid");
+  }
+  
+    </script>
+</body>
+
+</html>

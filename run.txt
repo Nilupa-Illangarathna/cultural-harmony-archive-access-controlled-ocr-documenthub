@@ -1,0 +1,8 @@
+npm i
+node servers/createProductsDB.js
+node servers/createLoginDB.js
+node servers/createHomepageDB.js
+node servers/createFeedbackDB.js
+node servers/createCommentsDB.js
+node servers/createAboutDB.js
+npm start

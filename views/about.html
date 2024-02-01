@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .content {
+            padding: 0rem 10% 0rem 10%;
+        }
+
+        .header {
+            background-color: #2b2a2a;
+            color: white;
+            text-align: center;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer img {
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        #scroll-menu {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        #scroll-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        #scroll-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/homepage">LegacyLanka</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/homepage">Home</a></li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                    <a class="dropdown-item" href="/products/items">Electric</a>
+                    <a class="dropdown-item" href="/products/items">Wooden</a>
+                    <a class="dropdown-item" href="/products/items">Fabric</a>
+                </div>  
+            </li> -->
+            <% if (isAdmin) { %>
+                <li class="nav-item"><a class="nav-link" href="/showFeedbacks">Show Feedbacks</a></li>
+            <% } %>
+            <!-- <li class="nav-item"><a class="nav-link" href="/products">Products</a></li> -->
+            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="/feedback">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div id="scroll-menu">
+            <a href="#about_us">About us</a>
+            <a href="#Founder">Founder</a>
+            <a href="#company_history">Company history</a>
+            <a href="#address">Address</a>
+        </div>
+        <div class="container mt-3">
+            <div class="text-center">
+                <br><br>
+                <h1 id="about_us">About Us</h1>
+                <br>
+                <img src="images/Logo/Logo.png" style="padding: auto; width:200px; height: 200px;" class="mt-3">
+                <br><br><br>
+                <h5 id="Founder">
+                    <%= data.biography %>
+                </h5><br>
+                <br>
+                <br>
+                <h4 id="company_history">
+                    Our Mission
+                </h4><br>
+                <p>
+                    <%= data.history %>
+                </p>
+                <br>
+                <h4 id="company_history">
+                    What We Do
+                </h4><br>
+                <p>
+                    <%= data.address %>
+                </p><br>
+                <h4 id="company_history">
+                    Join Us on this Journey
+                </h4><br>
+                <p>
+                    <%= data.Founder %>
+                </p>
+
+                <h4 id="company_history">
+                    Sources
+                </h4><br>
+                <p style="text-align: start; margin-left: 10%; margin-right: 10%;">
+                    1967: Land Tenure in Village Ceylon: A Sociological and Historical Study. London: Cambridge University Press.<br>
+                    1981: A History of Sri Lanka. Delhi: Oxford University Press.<br>
+                    1994: The Muslims of Sri Lanka: One Thousand Years of Ethnic Harmony, 900-1915. Sri Lanka: The Lanka Islamic Foundation.<br>
+                    2001: The Plantation Tamils of Ceylon: New Historical Perspectives on Migration. London: Leicester University Press.<br>
+                    1997: "The Vicissitudes of the Sinhala-Buddhist Identity through Time and Change." In, Michael Roberts (Ed.), Sri Lanka: Collective Identities Revisited, Volume 1, pp. 355-384. Sri Lanka: Marga Institute.<br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br><br>
+    <div id="footer" class="footer">
+        <img src="images/Logo/Logo.png" alt="Company Logo" style="width: 50px; border-radius: 50%;">
+        <p style="color: #ffffff;">&copy; ENG18/19</p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+

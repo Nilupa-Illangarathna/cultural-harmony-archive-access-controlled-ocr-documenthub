@@ -1,0 +1,110 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community News</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .content {
+            padding: 0rem 10% 0rem 10%;
+        }
+
+        .header {
+            background-color: #2b2a2a;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer img {
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        #scroll-menu {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        #scroll-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        #scroll-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Community News</h1>
+    </div>
+
+    <div class="content">
+        <!-- News Content Goes Here -->
+        <div>
+            <h2 id="news-headline"></h2>
+            <img id="news-image" alt="">
+            <p id="news-description"></p>
+            <p id="news-extended-description"></p>
+            <button onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <div id="scroll-menu">
+        <a href="#header">Welcome</a>
+        <a href="#news-events">News and Events</a>
+        <!-- Add more links as needed -->
+    </div>
+
+    <div class="footer">
+        <p>Follow Us on Social Media:</p>
+        <!-- Social Media Icons or Links -->
+        <img src="path/to/facebook-icon.png" alt="Facebook">
+        <img src="path/to/twitter-icon.png" alt="Twitter">
+        <img src="path/to/instagram-icon.png" alt="Instagram">
+    </div>
+
+    <script>
+        // const selectedNews = <%- JSON.stringify(selectedNews) %>;
+        
+        document.getElementById('news-headline').innerText = selectedNews.headline;
+        document.getElementById('news-image').src = selectedNews.imageUrl;
+        document.getElementById('news-description').innerText = selectedNews.description;
+        document.getElementById('news-extended-description').innerText = selectedNews.extendedDescription;
+        
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    
+    
+    
+</body>
+</html> -->

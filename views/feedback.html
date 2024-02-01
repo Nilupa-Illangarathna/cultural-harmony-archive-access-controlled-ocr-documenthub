@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .content {
+            padding: 0rem 28rem 0rem 20rem;
+        }
+
+        .invalid-feedback {
+            color: red;
+            display: none;
+            margin-top: 5px;
+        }
+
+        .is-invalid {
+            border-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/homepage">LegacyLanka</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/homepage">Home</a></li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                    <a class="dropdown-item" href="/products/items">Electric</a>
+                    <a class="dropdown-item" href="/products/items">Wooden</a>
+                    <a class="dropdown-item" href="/products/items">Fabric</a>
+                </div>  
+            </li> -->
+            <% if (isAdmin) { %>
+                <li class="nav-item"><a class="nav-link" href="/showFeedbacks">Show Feedbacks</a></li>
+            <% } %>
+            <!-- <li class="nav-item"><a class="nav-link" href="/products">Products</a></li> -->
+            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="/feedback">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="container mt-4">
+            <h2>Feedback</h2>
+            <form action="/submit-feedback" method="POST" id="feedbackForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback" id="emailError">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="tel" class="form-control" id="contactNumber" name="contactNumber" required>
+                    <div class="invalid-feedback" id="contactNumberError">
+                        Please enter a valid contact number (e.g., 123-456-7890).
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="feedback">Feedback</label>
+                    <textarea class="form-control" id="feedback" name="feedback" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const feedbackForm = document.getElementById('feedbackForm');
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+        const contactNumberInput = document.getElementById('contactNumber');
+        const contactNumberError = document.getElementById('contactNumberError');
+
+        feedbackForm.addEventListener('submit', function (event) {
+            if (!isValidEmail(emailInput.value)) {
+                event.preventDefault();
+                emailInput.classList.add('is-invalid');
+                emailError.style.display = 'block';
+            } else {
+                emailInput.classList.remove('is-invalid');
+                emailError.style.display = 'none';
+            }
+
+            if (!isValidContactNumber(contactNumberInput.value)) {
+                event.preventDefault();
+                contactNumberInput.classList.add('is-invalid');
+                contactNumberError.style.display = 'block';
+            } else {
+                contactNumberInput.classList.remove('is-invalid');
+                contactNumberError.style.display = 'none';
+            }
+        });
+
+        function isValidEmail(email) {
+            // Use a regular expression to validate the email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidContactNumber(contactNumber) {
+            // Use a regular expression to validate the contact number format
+            const contactNumberRegex = /^\d{3}\d{7}$/;
+            // const contactNumberRegex = /^\d$/;
+            return contactNumberRegex.test(contactNumber);
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
