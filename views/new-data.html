@@ -1,0 +1,331 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .content {
+            /* padding: 0rem 10% 0rem 10%; */
+            margin-top: 2rem; /* Adjusted margin-top */
+        }
+
+        .header {
+            background-color: #2b2a2a;
+            color: white;
+            text-align: center;
+            padding: 1rem 0; /* Adjusted padding */
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem 0; /* Adjusted padding */
+        }
+
+        .footer img {
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        #scroll-menu {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        #scroll-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        #scroll-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .grid__item {
+            background-color: #fff;
+            border-radius: 0.4rem;
+            overflow: hidden;
+            box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .grid__item:hover {
+            transform: translateY(-0.5%);
+            box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
+        }
+
+
+        .property-card {
+            height: 18em;
+            width: 18em;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            position: relative;
+            -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            border-radius: 16px;
+            overflow: hidden;
+            -webkit-box-shadow: 15px 15px 27px white, -15px -15px 27px white;
+            box-shadow: 15px 15px 27px white, -15px -15px 27px white;
+        }
+
+        /* Top Half of card, image. */
+
+        .property-image {
+            height: 14em;
+            width: 18em;
+            padding: 2em 2em;
+            position: Absolute;
+            top: 0px;
+            -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Bottom Card Section */
+
+        .property-description {
+            background-color: white;
+            height: 12em;
+            width: 18em;
+            position: absolute;
+            bottom: 0em;
+            -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 0.5em 1em;
+            text-align: center;
+        }
+
+
+        /* Social Icons */
+
+        .property-social-icons {
+            width: 1em;
+            height: 1em;
+            background-color: black;
+            position: absolute;
+            bottom: 1em;
+            left: 1em;
+            -webkit-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            -o-transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* Property Cards Hover States */
+
+        .property-card:hover .property-description {
+            height: 0em;
+            padding: 0px 0em;
+        }
+
+        .property-card:hover .property-image {
+            height: 14.3em;
+        }
+
+        .property-card:hover .property-social-icons {
+            background-color: white;
+        }
+
+        .property-card:hover .property-social-icons:hover {
+            background-color: blue;
+            cursor: pointer;
+        }
+
+        #news-events {
+            margin-top: 2rem; /* Adjusted margin-top */
+        }
+
+        .card-slider .carousel-inner {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        .card-slider .carousel-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+            height: 50rem; /* Fixed height */
+            box-sizing: border-box;
+            padding: 0 5%; /* Adjusted padding */
+        }
+
+        .card-slider .carousel-item img {
+            width: 100%;
+            height: 100%; /* Make the image fill the entire carousel item */
+            object-fit: cover; /* Maintain aspect ratio and cover the entire space */
+            border-radius: 5px;
+        }
+
+        .card-slider .carousel-caption {
+            text-align: left;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+        }
+
+        .card-slider h5 {
+            font-size: 1.5em;
+            color: #2b2a2a; /* Updated text color */
+        }
+
+        .card-slider p {
+            font-size: 1em;
+            color: #343a40; /* Updated text color */
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/homepage">LegacyLanka</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/homepage">Home</a></li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                    <a class="dropdown-item" href="/products/items">Electric</a>
+                    <a class="dropdown-item" href="/products/items">Wooden</a>
+                    <a class="dropdown-item" href="/products/items">Fabric</a>
+                </div>  
+            </li> -->
+            <% if (isAdmin) { %>
+                <li class="nav-item"><a class="nav-link" href="/showFeedbacks">Show Feedbacks</a></li>
+            <% } %>
+            <!-- <li class="nav-item"><a class="nav-link" href="/products">Products</a></li> -->
+            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="/new-data">new data</a></li>
+            <li class="nav-item"><a class="nav-link" href="/feedback">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <body>
+        <div class="container mt-4">
+            <h2>New Data Form</h2>
+            <form action="/upload-data" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="imageInput">Upload Image 01</label>
+                    <input type="file" class="form-control-file" id="imageInput" name="imageInput" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="topicInput">Topic</label>
+                    <input type="text" class="form-control" id="topicInput" name="topicInput">
+                </div>
+                <div class="form-group">
+                    <label for="descriptionInput">Description or Upload Image 02</label>
+                    <div Chclass="input-group">
+                        <input type="text" class="form-control" id="descriptionInput" name="descriptionInput">
+                        <div class="input-group-append">
+                            <input type="file" class="btn btn-outline-secondary" id="imageInput2" name="imageInput2" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Data</button>
+            </form>
+        </div>
+    
+        
+        <script>
+            function uploadImage(inputId, folder) {
+                const input = document.getElementById(inputId);
+                const file = input.files[0];
+        
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('file', file);
+        
+                    fetch(`/upload/${folder}`, {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => console.log(data))
+                        .catch(error => console.error(error));
+                } else {
+                    console.error('No file selected.');
+                }
+            }
+        
+            function uploadImageOrText(imageInputId, topicInputId, descriptionInputId) {
+                const imageInput = document.getElementById(imageInputId);
+                const topicInput = document.getElementById(topicInputId);
+                const descriptionInput = document.getElementById(descriptionInputId);
+        
+                const imageFile = imageInput.files[0];
+                const topic = topicInput.value;
+                const description = descriptionInput.value;
+        
+                if (imageFile && (topic || description)) {
+                    console.error('Please select either an image or provide topic/description, not both.');
+                    return;
+                }
+        
+                if (imageFile) {
+                    uploadImage(imageInputId, '');
+                }
+        
+                if (topic || description) {
+                    // Handle text input or perform OCR on imageFile
+                    console.log('Handle text input or perform OCR here.');
+                }
+            }
+        
+            function runPythonScript() {
+                fetch('/run-python-script')
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log(data);
+                        // Display the results
+                        document.getElementById('results').innerText = data;
+                    })
+                    .catch(error => console.error(error));
+            }
+        </script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div id="footer" class="footer">
+        <img src="https://picsum.photos/700/700?random=8" alt="Company Logo" style="width: 50px; border-radius: 50%;">
+        <p>&copy; <%= new Date().getFullYear() %>
+                <%= data.title %> @ Org</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

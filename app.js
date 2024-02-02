@@ -4,6 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const multer = require('multer');
 
 const app = express();
 
@@ -259,9 +260,13 @@ app.post('/submit-feedback', (req, res) => {
 });
 
 
-// Route to show feedbacks
-app.get('/showFeedbacks', (req, res) => {
-  res.sendFile(__dirname + '/views/showFeedbacks.html');
+// // Route to show feedbacks
+// app.get('/showFeedbacks', (req, res) => {
+//   res.sendFile(__dirname + '/views/showFeedbacks.html');
+// });
+
+app.get("/showFeedbacks", function(req, res) {
+  res.render("showFeedbacks.html", { data: homepageData , isAdmin:isAdmin });
 });
 
 app.get('/get-feedbacks', (req, res) => {
@@ -338,13 +343,100 @@ function runPythonScript() {
 }
 
 // Call the function to run the Python script
-runPythonScript();
+// runPythonScript();
 
 
 
+// Multer configuration for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'public/images/attractive images/');
+  },
+  filename: (req, file, cb) => {
+      cb(null, `attractive${getNewImageNumber()}.jpg`);
+  }
+});
+
+// Multer configuration for file uploads
+const storage1 = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, '');
+  },
+  filename: (req, file, cb) => {
+      cb(null, `input1.png`);
+  }
+});
+
+const upload = multer({ storage: storage1 });
+
+// // Route for the new data form
+// app.get('/new-data', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/views/new-data.html'));
+// });
+
+// Feedback route
+app.get("/new-data", function(req, res) {
+  res.render("new-data.html", { data: homepageData, isAdmin: isAdmin });
+});
+
+// Route for handling data submission
+app.post('/upload-data', upload.fields([{ name: 'imageInput', maxCount: 1 }, { name: 'imageInput2', maxCount: 1 }]), (req, res) => {
+  const topic = req.body.topicInput;
+  const description = req.body.descriptionInput;
+
+  // Run Python script after 3 seconds
+  setTimeout(() => {
+      const pythonInterpreter = 'C:\\Users\\nilup\\anaconda3\\python.exe';
+      const pythonScript = 'main.py';
+
+      // Ensure input and output directories exist
+      const inputDir = path.join(__dirname, 'input');
+      const outputDir = path.join(__dirname, 'output');
+      fs.mkdirSync(inputDir, { recursive: true });
+      fs.mkdirSync(outputDir, { recursive: true });
+
+      // Execute the Python script
+      const pythonProcess = exec(`${pythonInterpreter} ${pythonScript}`, { cwd: __dirname }, (error, stdout, stderr) => {
+          if (error) {
+              console.error(`Error running Python script: ${error.message}`);
+              return;
+          }
+
+          // Read the OCR result from the output file
+          const ocrTextPath = path.join(outputDir, 'ocr_text.txt');
+          fs.readFile(ocrTextPath, 'utf-8', (readError, data) => {
+              if (readError) {
+                  console.error(`Error reading OCR result: ${readError.message}`);
+                  return;
+              }
+
+              // Render the output.html file with dynamic data
+              res.render('output.html', { filename: req.files['imageInput'][0].filename, topic, description, ocrData: data });
+          });
+      });
+
+      pythonProcess.stdin.end();
+  }, 3000);
+});
 
 
 
+// Function to get the next image number in the sequence
+function getNewImageNumber() {
+  // Implement your logic to determine the next image number
+  // You can use the existing images in the directory to calculate the next number
+  return 5; // For example, return the next number based on the existing images
+}
+
+// Example route handler
+app.post('/submit-form', (req, res) => {
+  const filename = req.files['imageInput'][0].filename;
+  const topic = req.body.topic;
+  const description = req.body.description;
+  const ocrData = "Data from OCR";  // Replace with your actual OCR data
+
+  res.render('output.html', { filename, topic, description, ocrData });
+});
 
 
 

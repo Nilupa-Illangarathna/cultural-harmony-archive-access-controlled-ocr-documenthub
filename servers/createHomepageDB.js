@@ -19,7 +19,6 @@ class LatestNews {
         ].sort(() => Math.random() - 0.5);
     }
 }
-
 class AttractiveImage {
     constructor(name, imageUrl, description) {
         this.name = name;
@@ -28,15 +27,39 @@ class AttractiveImage {
     }
 
     static fetchAttractiveImages() {
+        const imageAddresses = [
+            "images/attractive images/attractive1.jpg",
+            "images/attractive images/attractive2.jpg",
+            "images/attractive images/attractive3.jpg",
+            "images/attractive images/attractive4.jpg",
+            "images/attractive images/attractive5.jpg",
+            "images/attractive images/attractive6.jpg",
+            "images/attractive images/attractive7.jpg",
+            "images/attractive images/attractive8.jpg",
+            "images/attractive images/attractive9.jpg"
+        ];
+
         return [
-            new AttractiveImage("Bird Tree", "images/attractive images/attractive01.jpg", "A vibrant tree adorned with colorful birds, creating a lively and melodious natural symphony."),
-            new AttractiveImage("Snowed Lake", "images/attractive images/attractive02.jpg", "A serene wintry scene: A bird perches on a tree beside a snow-covered lake."),
-            new AttractiveImage("Spring Season", "images/attractive images/attractive03.jpg", "In a blossoming spring, a vibrant tree hosts a symphony as colorful birds celebrate nature's awakening."),
-            new AttractiveImage("Ride on sea", "images/attractive images/attractive04.jpg", "Graceful bird soars above waves, finding rest on swaying tree in the sea's embrace."),
-            new AttractiveImage("Tropical island", "images/attractive images/attractive05.jpg", "Colorful avian species inhabit lush trees on a tropical island, creating a vibrant symphony of nature."),
+            new AttractiveImage("Sinhalese Festivals", getRandomImage(), "The Sinhalese community continues to celebrate cultural events with enthusiasm and traditional fervor. Festivals and ceremonies play a vital role in preserving and showcasing their rich cultural heritage."),
+            new AttractiveImage("Tamil Celebrations", getRandomImage(), "Tamils in Sri Lanka cherish their cultural identity through vibrant celebrations and festivals. Events like Thai Pongal and Diwali are marked by colorful traditions and communal gatherings."),
+            new AttractiveImage("Muslim Festivities", getRandomImage(), "Muslims in Sri Lanka engage in joyous celebrations, marking Islamic festivals such as Eid al-Fitr and Eid al-Adha. Festive gatherings and feasts are integral to these cultural events."),
+            new AttractiveImage("Burgher Heritage", getRandomImage(), "The Burgher community's cultural events reflect their European heritage and Christian traditions. Festivals and gatherings showcase their unique identity within the multicultural landscape of Sri Lanka."),
+            new AttractiveImage("Upcountry Tamil Culture", getRandomImage(), "Upcountry Tamils contribute to Sri Lanka's cultural diversity through their distinctive celebrations. Blending their cultural practices with traditional Tamil festivities, they add vibrancy to the nation's events."),
+            new AttractiveImage("Malay Festivals", getRandomImage(), "Malays in Sri Lanka bring Southeast Asian influences to cultural celebrations. Festivals highlight their rich heritage, incorporating traditions from their ancestral homeland into the vibrant cultural tapestry of the nation."),
+            new AttractiveImage("Veddahs Traditions", getRandomImage(), "The Veddahs' unique cultural celebrations reflect their ancient heritage. Preserving their distinct way of life, these festivities contribute to the cultural mosaic of Sri Lanka, showcasing the indigenous traditions of the Veddah community."),
+            new AttractiveImage("Indian Moor Culture", getRandomImage(), "Indian Moors in Sri Lanka engage in vibrant cultural celebrations, showcasing the diversity of their origins. Festivals and events bring together the community, highlighting their unique traditions within the multicultural landscape."),
+            new AttractiveImage("Chinese Sri Lankan Customs", getRandomImage(), "Chinese Sri Lankans infuse cultural richness into celebrations, incorporating elements from their Chinese heritage. These events contribute to the multicultural fabric of Sri Lanka, reflecting the diverse traditions of the Chinese community."),
+            new AttractiveImage("Bharatha People Festivities", getRandomImage(), "The Bharatha people celebrate cultural events, connecting with their historical ties to South India. Festivals highlight their unique traditions, contributing to the rich ethnic diversity of Sri Lanka."),
         ].sort(() => Math.random() - 0.5);
+
+        function getRandomImage() {
+            return imageAddresses[Math.floor(Math.random() * imageAddresses.length)];
+        }
     }
 }
+
+// Fetch the information
+const attractiveImagesList = AttractiveImage.fetchAttractiveImages();
 
 const homepageData = {
     title: "Homepage",

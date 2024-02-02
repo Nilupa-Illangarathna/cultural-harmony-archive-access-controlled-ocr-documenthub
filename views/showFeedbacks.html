@@ -12,26 +12,30 @@
 
 </style>
 <body>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="/homepage">TradeLink</a>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="/homepage">Home</a></li>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Products
-                </a>
-                <div class="dropdown-menu" aria-labelledby="productsDropdown">
-                    <a class="dropdown-item" href="/products/items">Electric</a>
-                    <a class="dropdown-item" href="/products/items">Wooden</a>
-                    <a class="dropdown-item" href="/products/items">Fabric</a>
-                </div>  
-            </li> -->
-            <li class="nav-item"><a class="nav-link" href="/products">Products</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="/feedback">Feedback</a></li>
-        </ul>
-    </nav>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="/homepage">LegacyLanka</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="/homepage">Home</a></li>
+        <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Products
+            </a>
+            <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                <a class="dropdown-item" href="/products/items">Electric</a>
+                <a class="dropdown-item" href="/products/items">Wooden</a>
+                <a class="dropdown-item" href="/products/items">Fabric</a>
+            </div>  
+        </li> -->
+        <% if (isAdmin) { %>
+            <li class="nav-item"><a class="nav-link" href="/showFeedbacks">Show Feedbacks</a></li>
+        <% } %>
+        <!-- <li class="nav-item"><a class="nav-link" href="/products">Products</a></li> -->
+        <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="/new-data">new data</a></li>
+        <li class="nav-item"><a class="nav-link" href="/feedback">Feedback</a></li>
+    </ul>
+</nav>
 
   <div class="container mt-5">
     <h1 class="display-4">Feedback Comments</h1>
